@@ -1,0 +1,13 @@
+.idea
+.idea_modules
+target
+project/boot
+*.swp
+*.swo
+project.vim
+tags
+.lib
+*~
+*#
+z_local.sbt
+.DS_Store
