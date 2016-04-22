@@ -1,11 +1,12 @@
 FS2 Cats: Interoperability between FS2 and Cats
 ===============================================
 
-[![Build Status](https://travis-ci.org/functional-streams-for-scala/fs2.svg?branch=master)](http://travis-ci.org/functional-streams-for-scala/fs2-cats)
+[![Build Status](https://travis-ci.org/functional-streams-for-scala/fs2-cats.svg?branch=master)](http://travis-ci.org/functional-streams-for-scala/fs2-cats)
 [![Gitter Chat](https://badges.gitter.im/functional-streams-for-scala/fs2.svg)](https://gitter.im/functional-streams-for-scala/fs2)
 
-This library provides an interoperability layer between FS2 and Cats. At this time, the API of this library is a single import:
+This library provides an interoperability layer between FS2 and Cats. At this time, the API of this library is two imports:
 
-    import fs2.interop.cats._
+    import fs2.interop.cats._         // Provides conversions from FS2 to Cats (e.g., FS2 Monad to Cats Monad)
+    import fs2.interop.cats.reverse._ // Provides conversions from Cats to FS2 (e.g., Cats Monad to FS2 Monad)
 
-This provides implicit conversions between the type classes in `fs2.util` and Cats.
+Note: importing both of these in to the same lexical scope may cause issues with ambiguous implicits.
