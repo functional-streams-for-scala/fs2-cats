@@ -2,6 +2,7 @@ package fs2
 package interop
 
 import _root_.cats.Monoid
+import _root_.cats.Semigroup
 
 package object cats extends Instances {
 
@@ -14,6 +15,9 @@ package object cats extends Instances {
 
     def foldMonoid(implicit M: Monoid[A]): Stream[F, A] =
       self.fold(M.empty)(M.combine(_, _))
+
+    def foldSemigroup(implicit S: Semigroup[A]): Stream[F, A] =
+      self.reduce(S.combine(_, _))
 
   }
 
