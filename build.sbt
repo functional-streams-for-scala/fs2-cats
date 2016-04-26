@@ -6,6 +6,7 @@ lazy val contributors = Seq(
   "fthomas" -> "Frank Thomas",
   "runarorama" -> "Rúnar Ó. Bjarnason",
   "jedws" -> "Jed Wesley-Smith",
+  "wookietreiber" -> "Christian Krause",
   "mpilquist" -> "Michael Pilquist"
 )
 
