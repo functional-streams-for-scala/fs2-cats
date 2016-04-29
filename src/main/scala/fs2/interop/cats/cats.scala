@@ -1,7 +1,6 @@
 package fs2
 package interop
 
-import _root_.cats.Applicative
 import _root_.cats.Monoid
 import _root_.cats.Semigroup
 
@@ -33,8 +32,14 @@ package object cats extends Instances {
     def runGroupByFoldMonoid[K](f: A => K)(implicit M: Monoid[A]): Free[F, Map[K, A]] =
       runFoldMap(a => Map(f(a) -> a))
 
-    def runGroupBy[X[_], K](f: A => K)(implicit A: Applicative[X], M: Monoid[X[A]]): Free[F, Map[K, X[A]]] =
-      runGroupByFoldMap(f)(A.pure)
+    def runGroupBy[K](f: A => K)(implicit M: Monoid[A]): Free[F, Map[K, Vector[A]]] = {
+      implicit def vectorMonoid = new Monoid[Vector[A]] {
+        def empty = Vector.empty[A]
+        def combine(a: Vector[A], b: Vector[A]) = a ++ b
+      }
+
+      runGroupByFoldMap(f)(a => Vector(a))
+    }
 
   }
 
