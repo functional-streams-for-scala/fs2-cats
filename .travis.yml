@@ -1,10 +1,25 @@
 language: scala
+
 scala:
-  - 2.11.8
+- 2.11.8
+
 jdk:
-  - oraclejdk8
+- oraclejdk8
+
 sudo: false
+
 cache:
   directories:
-    - $HOME/.ivy2
-    - $HOME/.sbt
+  - $HOME/.ivy2
+  - $HOME/.sbt
+
+script:
+- sbt ++$TRAVIS_SCALA_VERSION test
+
+env:
+  global:
+  - secure: p0EunkNP/KHM4Cjez+mW2zzAzSAqEJMRZy5zPj4ukCXs7UEGGcvXnT7nEnGy7CUINEwuBhZ/iBsu6GsCzAe3xftRnrz4Yii0bf7RGzfQVum0uU0Gw/ZhDK4e5PIQITL00lDD9esFzxQJ35wKRmzGkDtuXNmPK6n1aEl6XQBuPAkDsqfeYjeoSEnrZvQ3PA7Mkd6Io8H7IxaPn8Gv/CLqBwkzmXSqtC1jnO+EPxK5EPGu8/JNacdRQQdj3mEN+VyWP7TQ7j3F9pEIcBZMEE5cNDgWeVOEdBjr1u7j/A8HqJDawzbCarsg91gQHRbQBczAixHh/NMFkSFN5nICEPqWJL7HAcwZeVpmt/aXogyRAbiuP4zvyA92qovH+LIlu17mdv8jnqa9n9xm/wS2ZQulQhYeMJahxHHYGeIUqczbDgVUV05lT2e4SFE3cRpaY6DlyVqGIkH9gp5lZPfqmk4VVBQimjPdUABzFNquvoTsiiyygLBz36WLZe1V4+hBXWeLoOrXDH6E6lH5KEkwUV1rLr1cC50Lpl4uK/3b2dCsYPMi0iWDpdwoyGX9bz2o04hYArBsRV5R+XKsl5piTK0I2mFRSttiby+4xR1CkeLa8A5kZAJw4jAY0xnwUWptB4WSeGOv3Qjz6I44ph3mUeMKM7XWQ8QsWBSvIJw75dB+rKo=
+  - secure: FZWqBcFw0x4dUVE2NhoAcc2ByOSgEjAGA6NVGRnDhl/bhgSgZIRb7QbClHh1ljHYwW0s/izDFKMHitRZfcuAwkL7zr6iEcqkl4ICl0BKjn2LttLYio4w3QFnjw9Ro9q5lYiJwL1vdXm/06GOt/S5nE4DrROVk+pCE/clv3z+LPVv5BzhFQocLf8PEYGuKFebsJkLlEJU9UBanN01VMX++Sy+cvkRYxeIauxfONB0ux3C7mI2mEbYl13KJXc6RsxBsyrUdcFmwTub/9LSssja26Nyq9s2EddYvzKzxkjw4fAPbxylJBag3BiYHCGIP9oQifol/NEdJlTZq1Fipes4VEwAwFngT97o+TDmSKdoY4vYbioSTmOTcGiXILloM6QESOubimc4mfpp/XSk9NOePWEmAvBzIZKJbg3hQMHfAmQKI72CmL025b9sfO/0F91PF4oU9w0VTgbmHZVRMXY1eDkl/sbSI474aaYgtQpz9JDLYK+LxG+JrAiayE+ncaygx3dvTia+dhWAP9FVv4dOF1jk3LE5PmjLwI+gnnFSIx/I6IU6SaFA7n6x4YcXesIBMHwhtwIsXi8qyo1O+YdFcmBxwXXSaarxRy8q14Anc+lMw1JzsGr/La3TANgEnm1Jhx8pl63+KrBoJl9w92CWg9MfHBkRHPVQMv7NQNCIDwM=
+
+after_success:
+- '[[ $TRAVIS_BRANCH == "master" ]] && { sbt publish; };'
