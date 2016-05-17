@@ -36,7 +36,7 @@ addCompilerPlugin("org.spire-math" % "kind-projector" % "0.7.1" cross CrossVersi
 resolvers += "Sonatype Public" at "https://oss.sonatype.org/content/groups/public/"
 val catsVersion = "0.4.1"
 libraryDependencies ++= Seq(
-  "co.fs2" %% "fs2-core" % "0.9.0-SNAPSHOT",
+  "co.fs2" %% "fs2-core" % "0.9.0-M1",
   "org.typelevel" %% "cats-core" % catsVersion,
   "org.typelevel" %% "cats-laws" % catsVersion % "test"
 )
@@ -84,11 +84,6 @@ credentials ++= (for {
 publishMavenStyle := true
 pomIncludeRepository := { _ => false }
 pomExtra := {
-  <url>https://github.com/functional-streams-for-scala/fs2-cats</url>
-  <scm>
-    <url>git@github.com:functional-streams-for-scala/fs2-cats.git</url>
-    <connection>scm:git:git@github.com:functional-streams-for-scala/fs2-cats.git</connection>
-  </scm>
   <developers>
     {for ((username, name) <- contributors) yield
     <developer>
