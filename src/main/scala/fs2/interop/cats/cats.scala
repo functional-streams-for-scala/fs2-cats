@@ -6,6 +6,7 @@ import _root_.cats.Semigroup
 
 import _root_.cats.std.map.mapMonoid
 
+import fs2.util.Catchable
 import fs2.util.Free
 
 package object cats extends Instances {
@@ -40,6 +41,18 @@ package object cats extends Instances {
 
       runGroupByFoldMapFree(f)(a => Vector(a))
     }
+
+    def runFoldMap[B](f: A => B)(implicit F: Catchable[F], M: Monoid[B]): F[B] =
+      runFoldMapFree(f).run
+
+    def runGroupByFoldMap[K, B: Monoid](f: A => K)(g: A => B)(implicit F: Catchable[F]): F[Map[K, B]] =
+      runGroupByFoldMapFree(f)(g).run
+
+    def runGroupByFoldMonoid[K](f: A => K)(implicit F: Catchable[F], M: Monoid[A]): F[Map[K, A]] =
+      runGroupByFoldMonoidFree(f).run
+
+    def runGroupBy[K](f: A => K)(implicit F: Catchable[F], M: Monoid[A]): F[Map[K, Vector[A]]] =
+      runGroupByFree(f).run
 
   }
 
