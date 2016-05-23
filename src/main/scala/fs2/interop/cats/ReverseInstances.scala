@@ -1,14 +1,13 @@
 package fs2.interop.cats
 
 import fs2.util._
-import _root_.cats.{ Eval, Functor => CatsFunctor, Monad => CatsMonad, MonadError }
+import _root_.cats.{ Functor => CatsFunctor, Monad => CatsMonad, MonadError }
 import _root_.cats.arrow.NaturalTransformation
 
 trait ReverseInstances extends ReverseInstances0 {
 
   implicit def monadErrorToCatchable[F[_]](implicit F: MonadError[F, Throwable]): Catchable[F] = new Catchable[F] {
     def pure[A](a: A) = F.pure(a)
-    def suspend[A](a: => A) = F.pureEval(Eval.later(a))
     override def map[A, B](fa: F[A])(f: A => B) = F.map(fa)(f)
     def bind[A, B](fa: F[A])(f: A => F[B]) = F.flatMap(fa)(f)
     def fail[A](t: Throwable) = F.raiseError(t)
@@ -24,7 +23,6 @@ private[cats] trait ReverseInstances0 extends ReverseInstances1 {
 
   implicit def catsToMonad[F[_]](implicit F: CatsMonad[F]): Monad[F] = new Monad[F] {
     def pure[A](a: A) = F.pure(a)
-    def suspend[A](a: => A) = F.pureEval(Eval.later(a))
     override def map[A, B](fa: F[A])(f: A => B) = F.map(fa)(f)
     def bind[A, B](fa: F[A])(f: A => F[B]) = F.flatMap(fa)(f)
   }
