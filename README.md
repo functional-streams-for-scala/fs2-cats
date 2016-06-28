@@ -10,3 +10,14 @@ This library provides an interoperability layer between FS2 and Cats. At this ti
     import fs2.interop.cats.reverse._ // Provides conversions from Cats to FS2 (e.g., Cats Monad to FS2 Monad)
 
 Note: importing both of these in to the same lexical scope may cause issues with ambiguous implicits.
+
+### <a id="getit"></a> Where to get the latest version ###
+
+The 0.1.0 release is coming soon and you can start using the milestone release now.
+
+```scala
+// available for Scala 2.11.8 + Cats 0.6.0
+libraryDependencies += "co.fs2" %% "fs2-cats" % "0.1.0-M4"
+```
+
+
