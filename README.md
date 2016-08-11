@@ -17,6 +17,6 @@ The 0.1.0 release is coming soon and you can start using the milestone release n
 
 ```scala
 // available for Scala 2.11.8 + Cats 0.6.1
-libraryDependencies += "co.fs2" %% "fs2-cats" % "0.1.0-M6"
+libraryDependencies += "co.fs2" %% "fs2-cats" % "0.1.0-RC1"
 ```
 
