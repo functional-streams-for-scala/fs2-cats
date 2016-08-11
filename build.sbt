@@ -36,7 +36,7 @@ addCompilerPlugin("org.spire-math" % "kind-projector" % "0.7.1" cross CrossVersi
 resolvers += "Sonatype Public" at "https://oss.sonatype.org/content/groups/public/"
 val catsVersion = "0.6.1"
 libraryDependencies ++= Seq(
-  "co.fs2" %% "fs2-core" % "0.9.0-M6",
+  "co.fs2" %% "fs2-core" % "0.9.0-RC1",
   "org.typelevel" %% "cats-core" % catsVersion,
   "org.typelevel" %% "cats-laws" % catsVersion % "test"
 )
