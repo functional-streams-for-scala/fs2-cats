@@ -4,7 +4,7 @@ package interop
 import _root_.cats.Monoid
 import _root_.cats.Semigroup
 
-import _root_.cats.std.map.mapMonoid
+import _root_.cats.kernel.instances.map.catsKernelStdMonoidForMap
 
 import fs2.util.Catchable
 import fs2.util.Free
