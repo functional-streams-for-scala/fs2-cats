@@ -34,7 +34,7 @@ scalacOptions in (Test, console) <<= (scalacOptions in (Compile, console))
 addCompilerPlugin("org.spire-math" % "kind-projector" % "0.7.1" cross CrossVersion.binary)
 
 resolvers += "Sonatype Public" at "https://oss.sonatype.org/content/groups/public/"
-val catsVersion = "0.6.1"
+val catsVersion = "0.7.0"
 libraryDependencies ++= Seq(
   "co.fs2" %% "fs2-core" % "0.9.0-RC1",
   "org.typelevel" %% "cats-core" % catsVersion,

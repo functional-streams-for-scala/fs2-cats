@@ -2,7 +2,7 @@ package fs2.interop.cats
 
 import fs2.util._
 import _root_.cats.{ Functor => CatsFunctor, Monad => CatsMonad, MonadError }
-import _root_.cats.arrow.NaturalTransformation
+import _root_.cats.arrow.FunctionK
 
 trait ReverseInstances extends ReverseInstances0 {
 
@@ -14,8 +14,8 @@ trait ReverseInstances extends ReverseInstances0 {
     def attempt[A](fa: F[A]) = F.handleErrorWith(F.map(fa)(a => Right(a): Either[Throwable, A]))(t => pure(Left(t)))
   }
 
-  implicit def naturalTransformationToUf1[F[_], G[_]](implicit nt: NaturalTransformation[F, G]): UF1[F, G] = new UF1[F, G] {
-    def apply[A](fa: F[A]) = nt(fa)
+  implicit def functionKToUf1[F[_], G[_]](implicit fk: FunctionK[F, G]): UF1[F, G] = new UF1[F, G] {
+    def apply[A](fa: F[A]) = fk(fa)
   }
 }
 
