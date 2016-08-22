@@ -1,19 +1,22 @@
 package fs2
 package interop
 
-import _root_.cats.Monoid
-import _root_.cats.Semigroup
+import _root_.cats.{ Eq, Monoid, Semigroup }
+import _root_.cats.kernel.instances.all._
 
-import _root_.cats.kernel.instances.map.catsKernelStdMonoidForMap
-
-import fs2.util.Catchable
-import fs2.util.Free
+import fs2.util.{ Catchable, Free }
 
 package object cats extends Instances {
 
   object reverse extends ReverseInstances
 
   implicit class StreamCatsOps[F[_], A](val self: Stream[F, A]) extends AnyVal {
+
+    def distinctConsecutiveEq(implicit eq: Eq[A]): Stream[F, A] =
+      self.filterWithPrevious(eq.neqv)
+
+    def distinctConsecutiveByEq[B](f: A => B)(implicit eq: Eq[B]): Stream[F, A] =
+      self.filterWithPrevious((x, y) => eq.neqv(f(x), f(y)))
 
     def foldMap[B](f: A => B)(implicit M: Monoid[B]): Stream[F, B] =
       self.fold(M.empty)((b, a) => M.combine(b, f(a)))
@@ -33,14 +36,8 @@ package object cats extends Instances {
     def runGroupByFoldMonoidFree[K](f: A => K)(implicit M: Monoid[A]): Free[F, Map[K, A]] =
       runFoldMapFree(a => Map(f(a) -> a))
 
-    def runGroupByFree[K](f: A => K)(implicit M: Monoid[A]): Free[F, Map[K, Vector[A]]] = {
-      implicit def vectorMonoid = new Monoid[Vector[A]] {
-        def empty = Vector.empty[A]
-        def combine(a: Vector[A], b: Vector[A]) = a ++ b
-      }
-
+    def runGroupByFree[K](f: A => K)(implicit M: Monoid[A]): Free[F, Map[K, Vector[A]]] =
       runGroupByFoldMapFree(f)(a => Vector(a))
-    }
 
     def runFoldMap[B](f: A => B)(implicit F: Catchable[F], M: Monoid[B]): F[B] =
       runFoldMapFree(f).run
@@ -53,8 +50,5 @@ package object cats extends Instances {
 
     def runGroupBy[K](f: A => K)(implicit F: Catchable[F], M: Monoid[A]): F[Map[K, Vector[A]]] =
       runGroupByFree(f).run
-
   }
-
 }
-
