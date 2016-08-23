@@ -48,7 +48,6 @@ licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
 initialCommands := s"""
   import fs2._
-  import fs2.util.Task
   import fs2.interop.cats._
   import cats._
   import cats.implicits._
