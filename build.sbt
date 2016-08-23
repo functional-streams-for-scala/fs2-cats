@@ -7,7 +7,8 @@ lazy val contributors = Seq(
   "runarorama" -> "Rúnar Ó. Bjarnason",
   "jedws" -> "Jed Wesley-Smith",
   "wookietreiber" -> "Christian Krause",
-  "mpilquist" -> "Michael Pilquist"
+  "mpilquist" -> "Michael Pilquist",
+  "guersam" -> "Jisoo Park"
 )
 
 organization := "co.fs2"

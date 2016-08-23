@@ -3,6 +3,7 @@ package fs2.interop.cats
 import fs2.util._
 import _root_.cats.{ Functor => CatsFunctor, Monad => CatsMonad, MonadError }
 import _root_.cats.arrow.FunctionK
+import _root_.cats.data.Kleisli
 
 trait Instances extends Instances0 {
   implicit def effectToMonadError[F[_]](implicit F: Effect[F]): MonadError[F, Throwable] = new MonadError[F, Throwable] {
@@ -16,6 +17,21 @@ trait Instances extends Instances0 {
 
   implicit def uf1ToFunctionK[F[_], G[_]](implicit uf1: UF1[F, G]): FunctionK[F, G] = new FunctionK[F, G] {
     def apply[A](fa: F[A]) = uf1(fa)
+  }
+
+  implicit def kleisliSuspendableInstance[F[_], E](implicit F: Suspendable[F]): Suspendable[Kleisli[F, E, ?]] = new Suspendable[Kleisli[F, E, ?]] {
+    def pure[A](a: A): Kleisli[F, E, A] = Kleisli.pure[F, E, A](a)
+    override def map[A, B](fa: Kleisli[F, E, A])(f: A => B): Kleisli[F, E, B] = fa.map(f)
+    def flatMap[A, B](fa: Kleisli[F, E, A])(f: A => Kleisli[F, E, B]): Kleisli[F, E, B] = fa.flatMap(f)
+    def suspend[A](fa: => Kleisli[F, E, A]): Kleisli[F, E, A] = Kleisli(e => F.suspend(fa.run(e)))
+  }
+
+  implicit def kleisliCatchableInstance[F[_], E](implicit F: Catchable[F]): Catchable[Kleisli[F, E, ?]] = new Catchable[Kleisli[F, E, ?]] {
+    def pure[A](a: A): Kleisli[F, E, A] = Kleisli.pure[F, E, A](a)
+    override def map[A, B](fa: Kleisli[F, E, A])(f: A => B): Kleisli[F, E, B] = fa.map(f)
+    def flatMap[A, B](fa: Kleisli[F, E, A])(f: A => Kleisli[F, E, B]): Kleisli[F, E, B] = fa.flatMap(f)
+    def attempt[A](fa: Kleisli[F, E, A]): Kleisli[F, E, Attempt[A]] = Kleisli(e => F.attempt(fa.run(e)))
+    def fail[A](t: Throwable): Kleisli[F, E, A] = Kleisli(e => F.fail(t))
   }
 }
 
