@@ -25,14 +25,6 @@ trait Instances extends Instances0 {
     def flatMap[A, B](fa: Kleisli[F, E, A])(f: A => Kleisli[F, E, B]): Kleisli[F, E, B] = fa.flatMap(f)
     def suspend[A](fa: => Kleisli[F, E, A]): Kleisli[F, E, A] = Kleisli(e => F.suspend(fa.run(e)))
   }
-
-  implicit def kleisliCatchableInstance[F[_], E](implicit F: Catchable[F]): Catchable[Kleisli[F, E, ?]] = new Catchable[Kleisli[F, E, ?]] {
-    def pure[A](a: A): Kleisli[F, E, A] = Kleisli.pure[F, E, A](a)
-    override def map[A, B](fa: Kleisli[F, E, A])(f: A => B): Kleisli[F, E, B] = fa.map(f)
-    def flatMap[A, B](fa: Kleisli[F, E, A])(f: A => Kleisli[F, E, B]): Kleisli[F, E, B] = fa.flatMap(f)
-    def attempt[A](fa: Kleisli[F, E, A]): Kleisli[F, E, Attempt[A]] = Kleisli(e => F.attempt(fa.run(e)))
-    def fail[A](t: Throwable): Kleisli[F, E, A] = Kleisli(e => F.fail(t))
-  }
 }
 
 private[cats] trait Instances0 extends Instances1 {
@@ -43,6 +35,14 @@ private[cats] trait Instances0 extends Instances1 {
     def tailRecM[A, B](a: A)(f: A => F[Either[A,B]]): F[B] = defaultTailRecM(a)(f)
     def raiseError[A](t: Throwable) = F.fail(t)
     def handleErrorWith[A](fa: F[A])(f: Throwable => F[A]) = F.flatMap(F.attempt(fa))(e => e.fold(f, pure))
+  }
+
+  implicit def kleisliCatchableInstance[F[_], E](implicit F: Catchable[F]): Catchable[Kleisli[F, E, ?]] = new Catchable[Kleisli[F, E, ?]] {
+    def pure[A](a: A): Kleisli[F, E, A] = Kleisli.pure[F, E, A](a)
+    override def map[A, B](fa: Kleisli[F, E, A])(f: A => B): Kleisli[F, E, B] = fa.map(f)
+    def flatMap[A, B](fa: Kleisli[F, E, A])(f: A => Kleisli[F, E, B]): Kleisli[F, E, B] = fa.flatMap(f)
+    def attempt[A](fa: Kleisli[F, E, A]): Kleisli[F, E, Attempt[A]] = Kleisli(e => F.attempt(fa.run(e)))
+    def fail[A](t: Throwable): Kleisli[F, E, A] = Kleisli(e => F.fail(t))
   }
 }
 
