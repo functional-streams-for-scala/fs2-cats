@@ -13,7 +13,7 @@ lazy val contributors = Seq(
   "guersam" -> "Jisoo Park"
 )
 
-val catsVersion = "0.7.0"
+val catsVersion = "0.7.2"
 
 def scmBranch(v: String): String = {
   val Some(ver) = Version(v)
