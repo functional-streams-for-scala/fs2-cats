@@ -13,10 +13,8 @@ Note: importing both of these in to the same lexical scope may cause issues with
 
 ### <a id="getit"></a> Where to get the latest version ###
 
-The 0.1.0 release is coming soon and you can start using the milestone release now.
-
 ```scala
 // available for Scala 2.11.8 + Cats 0.7.2
-libraryDependencies += "co.fs2" %% "fs2-cats" % "0.1.0-RC2"
+libraryDependencies += "co.fs2" %% "fs2-cats" % "0.1.0"
 ```
 
