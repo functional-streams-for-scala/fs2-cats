@@ -12,10 +12,10 @@ package object cats extends Instances {
 
   implicit class StreamCatsOps[F[_], A](val self: Stream[F, A]) extends AnyVal {
 
-    def distinctConsecutiveEq(implicit eq: Eq[A]): Stream[F, A] =
+    def changesEq(implicit eq: Eq[A]): Stream[F, A] =
       self.filterWithPrevious(eq.neqv)
 
-    def distinctConsecutiveByEq[B](f: A => B)(implicit eq: Eq[B]): Stream[F, A] =
+    def changesByEq[B](f: A => B)(implicit eq: Eq[B]): Stream[F, A] =
       self.filterWithPrevious((x, y) => eq.neqv(f(x), f(y)))
 
     def foldMap[B](f: A => B)(implicit M: Monoid[B]): Stream[F, B] =
