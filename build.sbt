@@ -40,7 +40,7 @@ lazy val commonSettings = Seq(
   scalacOptions in (Compile, console) ~= {_.filterNot("-Ywarn-unused-import" == _)},
   scalacOptions in (Test, console) <<= (scalacOptions in (Compile, console)),
   libraryDependencies ++= Seq(
-    "co.fs2" %%% "fs2-core" % "0.9.0-RC2",
+    "co.fs2" %%% "fs2-core" % "0.9.0",
     "org.typelevel" %%% "cats-core" % catsVersion,
     "org.typelevel" %%% "cats-laws" % catsVersion % "test"
   ),
