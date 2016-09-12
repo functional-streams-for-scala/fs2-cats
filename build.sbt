@@ -53,7 +53,6 @@ lazy val commonSettings = Seq(
     import cats._
     import cats.implicits._
   """,
-  doctestWithDependencies := false,
   resolvers += "Sonatype Public" at "https://oss.sonatype.org/content/groups/public/",
   addCompilerPlugin("org.spire-math" % "kind-projector" % "0.7.1" cross CrossVersion.binary)
 ) ++ testSettings ++ scaladocSettings ++ publishingSettings ++ releaseSettings
