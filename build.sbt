@@ -13,7 +13,7 @@ lazy val contributors = Seq(
   "guersam" -> "Jisoo Park"
 )
 
-val catsVersion = "0.8.0"
+val catsVersion = "0.8.1"
 
 def scmBranch(v: String): String = {
   val Some(ver) = Version(v)
@@ -24,7 +24,7 @@ lazy val commonSettings = Seq(
   name := "fs2-cats",
   organization := "co.fs2",
   scalaVersion := "2.11.8",
-  crossScalaVersions := Seq("2.11.8", "2.12.0-RC2"),
+  crossScalaVersions := Seq("2.11.8", "2.12.0"),
   scalacOptions ++= Seq(
     "-feature",
     "-deprecation",
@@ -38,9 +38,9 @@ lazy val commonSettings = Seq(
     "-Ywarn-unused-import"
   ),
   scalacOptions in (Compile, console) ~= {_.filterNot("-Ywarn-unused-import" == _)},
-  scalacOptions in (Test, console) <<= (scalacOptions in (Compile, console)),
+  scalacOptions in (Test, console) := (scalacOptions in (Compile, console)).value,
   libraryDependencies ++= Seq(
-    "co.fs2" %%% "fs2-core" % "0.9.1",
+    "co.fs2" %%% "fs2-core" % "0.9.2",
     "org.typelevel" %%% "cats-core" % catsVersion,
     "org.typelevel" %%% "cats-laws" % catsVersion % "test"
   ),
@@ -54,7 +54,7 @@ lazy val commonSettings = Seq(
     import cats.implicits._
   """,
   resolvers += "Sonatype Public" at "https://oss.sonatype.org/content/groups/public/",
-  addCompilerPlugin("org.spire-math" % "kind-projector" % "0.9.2" cross CrossVersion.binary)
+  addCompilerPlugin("org.spire-math" % "kind-projector" % "0.9.3" cross CrossVersion.binary)
 ) ++ testSettings ++ scaladocSettings ++ publishingSettings ++ releaseSettings
 
 lazy val testSettings = Seq(
