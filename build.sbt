@@ -1,4 +1,5 @@
 import sbtrelease.Version
+import com.typesafe.sbt.pgp.PgpKeys.publishSigned
 
 lazy val contributors = Seq(
   "pchiusano" -> "Paul Chiusano",
@@ -128,6 +129,18 @@ lazy val commonJsSettings = Seq(
     s"-P:scalajs:mapSourceURI:$dir->$url/${scmBranch(version.value)}/"
   }
 )
+
+lazy val noPublish = Seq(
+  publish := (),
+  publishLocal := (),
+  publishSigned := (),
+  publishArtifact := false
+)
+
+lazy val root = project.in(file(".")).
+  settings(commonSettings).
+  settings(noPublish).
+  aggregate(fs2CatsJVM, fs2CatsJS)
 
 lazy val fs2Cats = crossProject.in(file(".")).
   settings(commonSettings: _*).
