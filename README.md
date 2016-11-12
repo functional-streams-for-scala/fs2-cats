@@ -14,7 +14,7 @@ Note: importing both of these in to the same lexical scope may cause issues with
 ### <a id="getit"></a> Where to get the latest version ###
 
 ```scala
-// available for Scala 2.11.8 + Cats 0.7.2
-libraryDependencies += "co.fs2" %% "fs2-cats" % "0.1.0"
+// available for Scala 2.11.8 / 2.12.0 + Cats 0.8.1
+libraryDependencies += "co.fs2" %% "fs2-cats" % "0.2.0"
 ```
 
