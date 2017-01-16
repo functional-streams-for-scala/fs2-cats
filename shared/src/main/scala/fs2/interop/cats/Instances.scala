@@ -61,8 +61,8 @@ private[cats] trait Instances2 {
     def map[A, B](fa: F[A])(f: A => B) = F.map(fa)(f)
   }
 
-  @inline protected def defaultTailRecM[F[_], A, B](a: A)(f: A => F[Either[A,B]])
-                                                   (implicit F: Monad[F]): F[B] =
+  protected def defaultTailRecM[F[_], A, B](a: A)(f: A => F[Either[A,B]])
+                                                 (implicit F: Monad[F]): F[B] =
     F.flatMap(f(a)) {
       case Left(a2) => defaultTailRecM(a2)(f)
       case Right(b) => F.pure(b)
