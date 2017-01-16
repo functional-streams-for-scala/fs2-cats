@@ -14,7 +14,7 @@ lazy val contributors = Seq(
   "guersam" -> "Jisoo Park"
 )
 
-val catsVersion = "0.8.1"
+val catsVersion = "0.9.0"
 
 def scmBranch(v: String): String = {
   val Some(ver) = Version(v)
@@ -25,7 +25,7 @@ lazy val commonSettings = Seq(
   name := "fs2-cats",
   organization := "co.fs2",
   scalaVersion := "2.11.8",
-  crossScalaVersions := Seq("2.11.8", "2.12.0"),
+  crossScalaVersions := Seq("2.11.8", "2.12.1"),
   scalacOptions ++= Seq(
     "-feature",
     "-deprecation",
