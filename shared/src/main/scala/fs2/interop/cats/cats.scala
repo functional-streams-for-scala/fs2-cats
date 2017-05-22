@@ -6,7 +6,7 @@ import _root_.cats.kernel.instances.all._
 
 import fs2.util.{ Catchable, Free }
 
-package object cats extends Instances {
+package object cats extends Instances with IOAsyncInstances {
 
   object reverse extends ReverseInstances
 
