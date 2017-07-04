@@ -43,7 +43,8 @@ lazy val commonSettings = Seq(
   libraryDependencies ++= Seq(
     "co.fs2" %%% "fs2-core" % "0.9.2",
     "org.typelevel" %%% "cats-core" % catsVersion,
-    "org.typelevel" %%% "cats-laws" % catsVersion % "test"
+    "org.typelevel" %%% "cats-laws" % catsVersion % "test",
+    "org.typelevel" %%% "cats-effect" % "0.2"
   ),
   scmInfo := Some(ScmInfo(url("https://github.com/functional-streams-for-scala/fs2-cats"), "git@github.com:functional-streams-for-scala/fs2-cats.git")),
   homepage := Some(url("https://github.com/functional-streams-for-scala/fs2")),
