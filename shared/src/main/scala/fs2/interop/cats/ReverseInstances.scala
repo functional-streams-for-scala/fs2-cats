@@ -14,7 +14,7 @@ trait ReverseInstances extends ReverseInstances0 {
     def attempt[A](fa: F[A]) = F.handleErrorWith(F.map(fa)(a => Right(a): Either[Throwable, A]))(t => pure(Left(t)))
   }
 
-  implicit def functionKToUf1[F[_], G[_]](implicit fk: FunctionK[F, G]): UF1[F, G] = new UF1[F, G] {
+  implicit def functionKToUf1[F[_], G[_]](fk: FunctionK[F, G]): UF1[F, G] = new UF1[F, G] {
     def apply[A](fa: F[A]) = fk(fa)
   }
 }
