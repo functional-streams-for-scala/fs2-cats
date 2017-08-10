@@ -153,8 +153,8 @@ trait IOAsyncInstances {
             actor ! Msg.Set(res)
           }
         }
-        t1.shift.unsafeRunAsync(win)
-        t2.shift.unsafeRunAsync(win)
+        (IO.shift(ec).flatMap(_ => t1)).runAsync(r => IO(win(r))).unsafeRunSync
+        (IO.shift(ec).flatMap(_ => t2)).runAsync(r => IO(win(r))).unsafeRunSync
       }
     }
 
