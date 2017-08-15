@@ -20,7 +20,7 @@ Important: FS2 0.10+ has a direct dependency on Cats and Cats Effect so this lib
 libraryDependencies += "co.fs2" %% "fs2-cats" % "0.4.0"
 
 // Available for Scala 2.11.8 / 2.12.1 + Cats 0.9.0
-libraryDependencies += "co.fs2" %% "fs2-cats" % "0.3.1"
+libraryDependencies += "co.fs2" %% "fs2-cats" % "0.3.0"
 
 // Available for Scala 2.11.8 / 2.12.0 + Cats 0.8.1
 libraryDependencies += "co.fs2" %% "fs2-cats" % "0.2.0"
