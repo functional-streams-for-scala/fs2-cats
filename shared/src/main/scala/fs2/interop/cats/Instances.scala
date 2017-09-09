@@ -15,7 +15,7 @@ trait Instances extends Instances0 {
     def handleErrorWith[A](fa: F[A])(f: Throwable => F[A]) = F.flatMap(F.attempt(fa))(e => e.fold(f, pure))
   }
 
-  implicit def uf1ToFunctionK[F[_], G[_]](implicit uf1: UF1[F, G]): FunctionK[F, G] = new FunctionK[F, G] {
+  implicit def uf1ToFunctionK[F[_], G[_]](uf1: UF1[F, G]): FunctionK[F, G] = new FunctionK[F, G] {
     def apply[A](fa: F[A]) = uf1(fa)
   }
 
