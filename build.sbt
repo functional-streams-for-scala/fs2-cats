@@ -14,7 +14,7 @@ lazy val contributors = Seq(
   "guersam" -> "Jisoo Park"
 )
 
-val catsVersion = "1.0.0-MF"
+val catsVersion = "1.0.0-RC1"
 
 def scmBranch(v: String): String = {
   val Some(ver) = Version(v)
@@ -25,7 +25,7 @@ lazy val commonSettings = Seq(
   name := "fs2-cats",
   organization := "co.fs2",
   scalaVersion := "2.11.11",
-  crossScalaVersions := Seq("2.11.11", "2.12.3"),
+  crossScalaVersions := Seq("2.11.11", "2.12.4"),
   scalacOptions ++= Seq(
     "-feature",
     "-deprecation",
@@ -41,10 +41,10 @@ lazy val commonSettings = Seq(
   scalacOptions in (Compile, console) ~= {_.filterNot("-Ywarn-unused-import" == _)},
   scalacOptions in (Test, console) := (scalacOptions in (Compile, console)).value,
   libraryDependencies ++= Seq(
-    "co.fs2" %%% "fs2-core" % "0.9.2",
+    "co.fs2" %%% "fs2-core" % "0.9.7",
     "org.typelevel" %%% "cats-core" % catsVersion,
     "org.typelevel" %%% "cats-laws" % catsVersion % "test",
-    "org.typelevel" %%% "cats-effect" % "0.4"
+    "org.typelevel" %%% "cats-effect" % "0.5"
   ),
   scmInfo := Some(ScmInfo(url("https://github.com/functional-streams-for-scala/fs2-cats"), "git@github.com:functional-streams-for-scala/fs2-cats.git")),
   homepage := Some(url("https://github.com/functional-streams-for-scala/fs2")),

@@ -16,6 +16,9 @@ Important: FS2 0.10+ has a direct dependency on Cats and Cats Effect so this lib
 ### <a id="getit"></a> Where to get the latest version ###
 
 ```scala
+// Available for Scala 2.11.11 / 2.12.4 + Cats 1.0.0-RC1 + Cats Effect 0.5 + FS2 0.9
+libraryDependencies += "co.fs2" %% "fs2-cats" % "0.5.0"
+
 // Available for Scala 2.11.11 / 2.12.3 + Cats 1.0.0-MF + Cats Effect 0.4 + FS2 0.9
 libraryDependencies += "co.fs2" %% "fs2-cats" % "0.4.0"
 
