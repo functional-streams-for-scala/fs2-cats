@@ -1,6 +1,8 @@
 FS2 Cats: Interoperability between FS2 and Cats
 ===============================================
 
+**As of FS2 1.0, this project is no longer necessary, as cats support is built in to FS2.**
+
 [![Build Status](https://travis-ci.org/functional-streams-for-scala/fs2-cats.svg?branch=master)](http://travis-ci.org/functional-streams-for-scala/fs2-cats)
 [![Gitter Chat](https://badges.gitter.im/functional-streams-for-scala/fs2.svg)](https://gitter.im/functional-streams-for-scala/fs2)
 
